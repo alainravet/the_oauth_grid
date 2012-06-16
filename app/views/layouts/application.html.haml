@@ -22,9 +22,14 @@
           %a.brand{:href => "/"} The Oauth Grid
           .container-fluid.nav-collapse
             %ul.nav
-              %li= link_to "Twitter (NYI)", "/path1"
-              %li= link_to "Facebook (NYI)", "/path2"
-              %li= link_to "LinkedIn (NYI)", "/path3"
+              %li= link_to "Users", users_path
+
+            .pull-right
+              %ul.nav
+                - if current_user
+                  %li= link_to "logout (#{current_user.name})",    logout_path
+                - else
+                  %li= link_to "autologin", autologin_path
 
     .container-fluid
       - flash.each do |name, msg|

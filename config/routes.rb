@@ -1,4 +1,8 @@
 TheOauthGrid::Application.routes.draw do
+
+  get 'logout'        => 'sessions#destroy', :as => :logout
+  get 'autologin/:id' => 'sessions#create' , :as => :autologin
+
   resources :users
 
   root :to => 'home#index'
