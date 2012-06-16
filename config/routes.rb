@@ -5,7 +5,7 @@ TheOauthGrid::Application.routes.draw do
 
   resources :users
 
-  root :to => 'home#index'
+  root :to => 'users#index'
 
   get "home/index"
 

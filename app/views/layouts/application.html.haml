@@ -28,8 +28,6 @@
               %ul.nav
                 - if current_user
                   %li= link_to "logout (#{current_user.name})",    logout_path
-                - else
-                  %li= link_to "autologin", autologin_path
 
     .container-fluid
       - flash.each do |name, msg|
@@ -37,15 +35,7 @@
           %a.close{"data-dismiss" => "alert"} ×
           = msg
       .row-fluid
-        .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Twitter (NYI)", "/path1"
-              %li= link_to "Facebook (NYI)", "/path2"
-              %li= link_to "LinkedIn (NYI)", "/path3"
-
-        .span9
+        .span12
           = yield
 
       %footer

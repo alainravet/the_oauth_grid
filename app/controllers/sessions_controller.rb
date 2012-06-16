@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def create
-    session[:user_id] = User.first.id
+    session[:user_id] = User.find(params[:id]).id
     redirect_to :back
   end
 
