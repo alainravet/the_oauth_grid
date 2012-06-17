@@ -37,6 +37,9 @@ class AuthenticationsController < ApplicationController
     redirect_to root_path, :notice => "Successfully destroyed authentication."
   end
 
+  def failure
+    raise "params == \n" + params.to_yaml
+  end
 end
 
 __END__

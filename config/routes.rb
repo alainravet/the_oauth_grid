@@ -2,7 +2,8 @@ TheOauthGrid::Application.routes.draw do
 
   resources :authentications, :only => [:index, :create, :destroy]
 
-  match '/auth/:provider/callback' => 'authentications#create'
+  match '/auth/:provider/callback'  => 'authentications#create'
+  match '/auth/failure'             => 'authentications#failure'
 
   match 'twitter/:authentication_id/check_credentials' => 'twitter#check_credentials', :as => 'check_twitter_credentials'
 
