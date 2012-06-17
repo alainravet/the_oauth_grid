@@ -25,7 +25,7 @@
       %td.twitter
         - twitter_authentications = user.authentications.find_all_by_provider('twitter')
         - if twitter_authentications.present?
-          = render :partial => 'authenticed_button', :collection => twitter_authentications, :as => :authentication
+          = render :partial => 'authentication_button', :collection => twitter_authentications, :as => :authentication
 
 
 
@@ -41,7 +41,7 @@
       = link_to 'LOGIN', '/auth/twitter', :class => 'btn btn-primary', :title => '/auth/twitter'
 
   %tr
-    %th{:colspan => 2} User, edit your authentication settings :
+    %th{:colspan => 2} revoke this app access to your stuff on social networks :
     %th= link_to 'revoke access', 'https://twitter.com/settings/applications', :target => '_blank', :class => 'btn btn-danger'
     %th
     %th
