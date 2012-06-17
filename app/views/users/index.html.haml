@@ -7,7 +7,9 @@
   %tr
     %th User
     %th Local login
-    %th Twitter
+    %th
+      =image_tag('twitter_32.png')
+      = link_to 'apps', "https://dev.twitter.com/apps/#{CREDENTIALS_STORE['twitter']['app_id']}/show", :target => '_blank'
     %th Facebook
     %th LinkedIn
 
@@ -28,6 +30,12 @@
   %tr
     %th{:colspan => 5}
       = link_to 'Add 1 User', new_user_path, :class => 'btn'
+
+  %tr
+    %th{:colspan => 2} User, edit your authentication settings :
+    %th= link_to 'revoke access', 'https://twitter.com/settings/applications', :target => '_blank', :class => 'btn btn-danger'
+    %th
+    %th
 
 %div
 
