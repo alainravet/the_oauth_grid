@@ -5,13 +5,18 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    omniauth = request.env["omniauth.auth"].except(:extra)
-    auth = current_user.authentications.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-    auth.secret = omniauth.credentials.secret
-    auth.token  = omniauth.credentials.token
-    auth.save!
+    if current_user
+      omniauth = request.env["omniauth.auth"].except(:extra)
+      auth = current_user.authentications.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+      auth.login  = omniauth.info.nickname
+      auth.secret = omniauth.credentials.secret
+      auth.token  = omniauth.credentials.token
+      auth.save!
 
-    redirect_to root_path, :notice => "Authentication successful."
+      redirect_to root_path, :notice => "Authentication successful."
+    else
+      redirect_to root_path, :error => "current_user is unknown; You must login locally first."
+    end
   end
 
   def destroy

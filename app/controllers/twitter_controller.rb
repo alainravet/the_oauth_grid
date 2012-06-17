@@ -6,19 +6,21 @@ class TwitterController < ApplicationController
     load_twitter_application_credentials(CREDENTIALS_STORE['twitter'])
     client = twitter_client_with_credentials(authentication)
 
+    nickname = authentication.login
+
     begin
       client.verify_credentials
-      flash[:notice] = 'Your Twitter credentials are valid'
+      flash[:notice] = "@#{nickname} Your Twitter credentials are valid"
 
     rescue Twitter::Error::Unauthorized => e
       authentication.delete  # remove invalid credentials from DB
-      flash[:error] = 'Error : Your Twitter credentials are invalid'
+      flash[:error] = "@#{nickname} Error : Your Twitter credentials are invalid. [Login] to get new ones."
 
     rescue => e # see **1 below
-      flash[:error] = "Unexpected Error : #{e}"
+      flash[:error] = "@#{nickname} Unexpected Error : #{e}"
     end
 
-    redirect_to root_path, :error => 'Error : Your Twitter credentials are invalid'
+    redirect_to root_path
   end
 
 private
