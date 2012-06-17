@@ -26,9 +26,6 @@
         - twitter_authentications = user.authentications.find_all_by_provider('twitter')
         - if twitter_authentications.present?
           = render :partial => 'authenticed_button', :collection => twitter_authentications, :as => :authentication
-        - else
-          login:
-          = link_to '/auth/twitter', '/auth/twitter'
 
 
 
@@ -38,8 +35,10 @@
       - if current_user
         = link_to "logout (#{current_user.name})",    logout_path, :class => 'btn btn-warning'
   %tr
-    %th{:colspan => 5}
+    %th{:colspan => 2}
       = link_to 'Add 1 User', new_user_path, :class => 'btn'
+    %th
+      = link_to 'LOGIN', '/auth/twitter', :class => 'btn btn-primary', :title => '/auth/twitter'
 
   %tr
     %th{:colspan => 2} User, edit your authentication settings :
