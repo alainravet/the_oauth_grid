@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
 gem 'omniauth', '~> 1.1.0'
+gem 'omniauth-twitter'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
