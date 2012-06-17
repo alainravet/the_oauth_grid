@@ -1,5 +1,9 @@
 TheOauthGrid::Application.routes.draw do
 
+  resources :authentications, :only => [:index, :create, :destroy]
+
+  match '/auth/:provider/callback' => 'authentications#create'
+
   get 'logout'        => 'sessions#destroy', :as => :logout
   get 'autologin/:id' => 'sessions#create' , :as => :autologin
 

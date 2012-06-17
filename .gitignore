@@ -16,3 +16,4 @@
 
 config/database.yml
 public/system
+config/env.yml
