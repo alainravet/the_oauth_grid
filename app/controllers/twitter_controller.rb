@@ -1,6 +1,6 @@
 class TwitterController < ApplicationController
 
-  def get_private_info
+  def check_credentials
     @authentication = Authentication.find(params[:authentication_id])
 
     Twitter.configure do |config|
