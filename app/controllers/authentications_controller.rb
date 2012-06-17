@@ -8,15 +8,27 @@ class AuthenticationsController < ApplicationController
     if current_user
       omniauth = request.env["omniauth.auth"].except(:extra)
       auth = current_user.authentications.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-      auth.login  = omniauth.info.nickname
-      auth.secret = omniauth.credentials.secret
-      auth.token  = omniauth.credentials.token
+      auth.login  = extract_login_from_twitter(omniauth)
+      auth.secret = extract_secret_from_twitter(omniauth)
+      auth.token  = extract_token_from_twitter(omniauth)
       auth.save!
 
       redirect_to root_path, :notice => "Authentication successful."
     else
       redirect_to root_path, :error => "current_user is unknown; You must login locally first."
     end
+  end
+
+  def extract_login_from_twitter(omniauth)
+    omniauth.info.nickname
+  end
+
+  def extract_token_from_twitter(omniauth)
+    omniauth.credentials.token
+  end
+
+  def extract_secret_from_twitter(omniauth)
+    omniauth.credentials.secret
   end
 
   def destroy
