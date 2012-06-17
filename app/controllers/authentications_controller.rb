@@ -5,10 +5,10 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    auth = request.env["rack.auth"]
-    current_user.authentications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
-    flash[:notice] = "Authentication successful."
-    redirect_to authentications_url
+    omniauth = request.env["omniauth.auth"].except(:extra)
+    current_user.authentications.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+
+    redirect_to authentications_url, :notice => "Authentication successful."
   end
 
   def destroy
