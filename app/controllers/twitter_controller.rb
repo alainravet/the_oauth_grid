@@ -10,7 +10,16 @@ class TwitterController < ApplicationController
       config.oauth_token_secret = @authentication.secret
     end
 
-    @verify_credentials = Twitter.verify_credentials
+    begin
+      Twitter.verify_credentials
+      flash[:notice] = 'Your Twitter credentials are valid'
+
+    rescue Twitter::Error::Unauthorized => e
+      @authentication.delete  # remove invalid credentials from DB
+      flash[:error] = 'Error : Your Twitter credentials are invalid'
+    end
+
+    redirect_to root_path, :error => 'Error : Your Twitter credentials are invalid'
   end
 
 end

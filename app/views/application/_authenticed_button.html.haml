@@ -5,4 +5,4 @@
   .uid= authentication.uid
   = link_to "X", authentication, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove"
 
-  = link_to "<obtain private info>", private_twitter_info_path(:authentication_id => authentication.id), :class => 'btn btn-primary', :target => '_blank'
+  = link_to "<obtain private info>", private_twitter_info_path(:authentication_id => authentication.id), :class => 'btn btn-primary'

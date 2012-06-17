@@ -11,14 +11,13 @@ class AuthenticationsController < ApplicationController
     auth.token  = omniauth.credentials.token
     auth.save!
 
-    redirect_to authentications_url, :notice => "Authentication successful."
+    redirect_to root_path, :notice => "Authentication successful."
   end
 
   def destroy
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
-    flash[:notice] = "Successfully destroyed authentication."
-    redirect_to authentications_url
+    redirect_to root_path, :notice => "Successfully destroyed authentication."
   end
 
 end

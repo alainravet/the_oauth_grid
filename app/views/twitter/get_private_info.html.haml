@@ -10,6 +10,10 @@
 = debug  @authentication
 
 
-%h2 verify_credentials:
+- if @verify_credentials
+  %h2 verify_credentials:
+  = debug @verify_credentials
 
-= debug @verify_credentials
+- else
+  %h2 verify_credentials: ERROR
+  = debug @error
