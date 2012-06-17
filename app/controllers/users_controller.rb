@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @current_user_authentications = current_user.authentications if current_user
 
     respond_to do |format|
       format.html # index.html.erb

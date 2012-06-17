@@ -16,12 +16,21 @@
   - @users.each do |user|
     %tr
       %td= link_to user.name, user
-      %td
+      %td.local
         - if current_user == user
           √
         - else
           = link_to 'login as..', autologin_path(:id => user.id), :class => 'btn'
-      %td= link_to '/auth/twitter', '/auth/twitter'
+
+      %td.twitter
+        - twitter_authentications = user.authentications.find_all_by_provider('twitter')
+        - if twitter_authentications.present?
+          = render :partial => 'authenticed_button', :collection => twitter_authentications, :as => :authentication
+        - else
+          login:
+          = link_to '/auth/twitter', '/auth/twitter'
+
+
 
   %tr
     %th
