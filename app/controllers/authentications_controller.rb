@@ -8,9 +8,9 @@ class AuthenticationsController < ApplicationController
     if current_user
       omniauth = request.env["omniauth.auth"].except(:extra)
       auth = current_user.authentications.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-      auth.login  = extract_login_from_twitter(omniauth)
-      auth.secret = extract_secret_from_twitter(omniauth)
-      auth.token  = extract_token_from_twitter(omniauth)
+      auth.login  = extract_login_from_twitter_or_facebook(omniauth)
+      auth.token  = extract_token(omniauth)
+      auth.secret = extract_secret_from_twitter(omniauth) # empty for Facebook
       auth.save!
 
       redirect_to root_path, :notice => "Authentication successful."
@@ -19,11 +19,11 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  def extract_login_from_twitter(omniauth)
+  def extract_login_from_twitter_or_facebook(omniauth)
     omniauth.info.nickname
   end
 
-  def extract_token_from_twitter(omniauth)
+  def extract_token(omniauth)
     omniauth.credentials.token
   end
 
