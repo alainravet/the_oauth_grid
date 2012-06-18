@@ -8,9 +8,11 @@ gem 'rails', '3.2.6'
 gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'omniauth-linkedin'
 
 gem 'twitter', '~> 2.5.0'
 gem "koala",   '~> 1.5.0'
+gem "linkedin",'~> 0.3.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

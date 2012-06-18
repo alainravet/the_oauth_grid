@@ -43,5 +43,19 @@ private
     end
   end
 
+  def self.check_linkedin_credentials(store, authentication)
+    begin
+      client = ::LinkedIn::Client.new(store.consumer_key, store.consumer_secret)
+      client.authorize_from_access(authentication.token, authentication.secret)
+      client.connections
+      true
+
+    rescue LinkedIn::Errors::UnauthorizedError => e
+      false
+    rescue => e
+      e
+    end
+  end
+
 
 end

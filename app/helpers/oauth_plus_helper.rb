@@ -12,12 +12,14 @@ private
 
   APP_MANAGER_URLS = {
       :twitter  => 'https://dev.twitter.com/apps/%s/show',
-      :facebook => 'https://developers.facebook.com/apps/%s'
+      :facebook => 'https://developers.facebook.com/apps/%s',
+      :linkedin => 'https://www.linkedin.com/secure/developer?app_id=%s'
   }
 
   REVOKE_ACCESS_URLS = {
       :twitter  => 'https://twitter.com/settings/applications',
-      :facebook => 'https://www.facebook.com/settings?tab=applications'
+      :facebook => 'https://www.facebook.com/settings?tab=applications',
+      :linkedin => 'https://www.linkedin.com/secure/settings?userAgree='
   }
 
 end
