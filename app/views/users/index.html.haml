@@ -1,3 +1,5 @@
+- supported_providers = [:twitter, :facebook]
+
 = content_for :title, 'Authentication Grid'
 %h1
   Authentication Grid
@@ -8,14 +10,10 @@
     %th User
     %th Local login
 
-    - [:twitter, :facebook].each do |provider|
+    - supported_providers.each do |provider|
       %th
         = image_tag("#{provider}_32.png")
-        = link_to '(manage)',
-                  manage_your_social_app_url(provider, CREDENTIALS_STORE[provider.to_s]['app_id']),
-                  :target => '_blank'
-
-    %th LinkedIn
+        = link_to '(manage)', manage_your_social_app_url(provider, CREDENTIALS_STORE[provider.to_s]['app_id']), :target => '_blank'
 
   - @users.each do |user|
     %tr
@@ -26,10 +24,10 @@
         - else
           = link_to 'login as..', autologin_path(:id => user.id), :class => 'btn'
 
-      %td.twitter
-        - twitter_authentications = user.authentications.find_all_by_provider('twitter')
-        - if twitter_authentications.present?
-          = render :partial => 'authentication_button', :collection => twitter_authentications, :as => :authentication
+      - supported_providers.each do |provider|
+        %td(class=provider)
+          = render :partial => 'authentication_button', :collection => user.authentications.find_all_by_provider(provider), :as => :authentication
+
 
   %tr
     %th
@@ -40,22 +38,13 @@
     %th{:colspan => 2}
       = link_to 'Add 1 User', new_user_path, :class => 'btn'
 
-    - [:twitter, :facebook].each do |provider|
+    - supported_providers.each do |provider|
       %th
-        = link_to 'LOGIN',
-                  authorize_access_path(provider),
-                  :class => 'btn btn-primary', :title => authorize_access_path(provider)
+        = link_to 'LOGIN', authorize_access_path(provider), :class => 'btn btn-primary', :title => authorize_access_path(provider)
 
   %tr
     %th{:colspan => 2} revoke this app access to your stuff on social networks :
 
-    - [:twitter, :facebook].each do |provider|
+    - supported_providers.each do |provider|
       %th
-        = link_to 'revoke access',
-                   revoke_access_url(provider, CREDENTIALS_STORE[provider.to_s]['app_id']),
-                   :target => '_blank', :class => 'btn btn-danger'
-    %th
-
-%div
-=debug session
-=debug cookies
+        = link_to 'revoke access', revoke_access_url(provider, CREDENTIALS_STORE[provider.to_s]['app_id']), :target => '_blank', :class => 'btn btn-danger'

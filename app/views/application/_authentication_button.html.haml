@@ -7,4 +7,5 @@
   - if current_user == authentication.user
     = link_to "X", authentication, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove"
 
-  = link_to "<Check Creds>", check_twitter_credentials_path(:authentication_id => authentication.id), :class => 'btn btn-primary'
+  - if authentication.provider.to_sym == :twitter
+    = link_to "<Check Creds>", check_twitter_credentials_path(:authentication_id => authentication.id), :class => 'btn btn-primary'
