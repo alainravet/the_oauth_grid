@@ -10,6 +10,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
 gem 'twitter', '~> 2.5.0'
+gem "koala",   '~> 1.5.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
