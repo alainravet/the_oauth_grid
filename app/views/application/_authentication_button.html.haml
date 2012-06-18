@@ -8,4 +8,6 @@
     = link_to "X", authentication, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove"
 
   - if authentication.provider.to_sym == :twitter
-    = link_to "<Check Creds>", check_twitter_credentials_path(:authentication_id => authentication.id), :class => 'btn btn-primary'
+    = link_to "Check Tw Creds", check_twitter_credentials_path(:authentication_id => authentication.id), :class => 'btn btn-primary'
+  - elsif authentication.provider.to_sym == :facebook
+    = link_to "Check FB Creds", check_facebook_credentials_path(:authentication_id => authentication.id), :class => 'btn btn-primary'

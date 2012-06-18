@@ -5,7 +5,8 @@ TheOauthGrid::Application.routes.draw do
   match '/auth/:provider/callback'  => 'authentications#create'
   match '/auth/failure'             => 'authentications#failure'
 
-  match 'twitter/:authentication_id/check_credentials' => 'twitter#check_credentials', :as => 'check_twitter_credentials'
+  match 'twitter/:authentication_id/check_credentials'  => 'twitter#check_credentials',  :as => 'check_twitter_credentials'
+  match 'facebook/:authentication_id/check_credentials' => 'facebook#check_credentials', :as => 'check_facebook_credentials'
 
   get 'logout'        => 'sessions#destroy', :as => :logout
   get 'autologin/:id' => 'sessions#create' , :as => :autologin

@@ -3,7 +3,7 @@
 }
 
 .authentication {
-  width: 130px;
+  width: 150px;
   float: left;
   background-color: #EEE;
   border: solid 1px #999;
@@ -21,7 +21,9 @@
   right: 3px;
   color: #333;
   padding: 2px 4px;
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: bold;
+
 }
 
 .authentication .remove:hover {
