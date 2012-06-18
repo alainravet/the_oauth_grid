@@ -7,10 +7,14 @@
   %tr
     %th User
     %th Local login
-    %th
-      =image_tag('twitter_32.png')
-      = link_to 'apps', "https://dev.twitter.com/apps/#{CREDENTIALS_STORE['twitter']['app_id']}/show", :target => '_blank'
-    %th Facebook
+
+    - [:twitter, :facebook].each do |provider|
+      %th
+        = image_tag("#{provider}_32.png")
+        = link_to '(manage)',
+                  manage_your_social_app_url(provider, CREDENTIALS_STORE[provider.to_s]['app_id']),
+                  :target => '_blank'
+
     %th LinkedIn
 
   - @users.each do |user|
@@ -27,8 +31,6 @@
         - if twitter_authentications.present?
           = render :partial => 'authentication_button', :collection => twitter_authentications, :as => :authentication
 
-
-
   %tr
     %th
     %th
@@ -37,13 +39,21 @@
   %tr
     %th{:colspan => 2}
       = link_to 'Add 1 User', new_user_path, :class => 'btn'
-    %th
-      = link_to 'LOGIN', '/auth/twitter', :class => 'btn btn-primary', :title => '/auth/twitter'
+
+    - [:twitter, :facebook].each do |provider|
+      %th
+        = link_to 'LOGIN',
+                  authorize_access_path(provider),
+                  :class => 'btn btn-primary', :title => authorize_access_path(provider)
 
   %tr
     %th{:colspan => 2} revoke this app access to your stuff on social networks :
-    %th= link_to 'revoke access', 'https://twitter.com/settings/applications', :target => '_blank', :class => 'btn btn-danger'
-    %th
+
+    - [:twitter, :facebook].each do |provider|
+      %th
+        = link_to 'revoke access',
+                   revoke_access_url(provider, CREDENTIALS_STORE[provider.to_s]['app_id']),
+                   :target => '_blank', :class => 'btn btn-danger'
     %th
 
 %div
