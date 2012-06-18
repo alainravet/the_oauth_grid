@@ -27,8 +27,8 @@ private
 
   def load_twitter_application_credentials(store)
     Twitter.configure do |config|
-      config.consumer_key     = store['consumer_key'   ]
-      config.consumer_secret  = store['consumer_secret']
+      config.consumer_key     = store.consumer_key
+      config.consumer_secret  = store.consumer_secret
     end
   end
 
