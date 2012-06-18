@@ -4,8 +4,11 @@ HOST_OS = RbConfig::CONFIG['host_os']
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
+
 gem 'omniauth', '~> 1.1.0'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
 gem 'twitter', '~> 2.5.0'
 
 # Bundle edge Rails instead:
